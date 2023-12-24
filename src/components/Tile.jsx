@@ -9,12 +9,21 @@ export default function Tile({ props }) {
     backgroundColor: props.bgColor,
   });
 
+  const fetchData = async () => {
+    try {
+      const data = await getImages();
+      props.updateTiles((images) => data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   const handleClick = () => {
     if (props.imageUrl !== null) {
-        
-        // Trigger the fade-in animation
-        animateTiles();
-        props.updateTiles((images) => getImages());
+
+      // Trigger the fade-in animation
+      animateTiles();
+      setTimeout(() => fetchData(), 1000);
     }
 
   };
@@ -56,7 +65,8 @@ export default function Tile({ props }) {
   }, [props.imageUrl, props.bgColor]);
 
   return (
-    <div className="tile" style={styles} onClick={handleClick}>
+    <div className="tile" style={{ backgroundColor: styles.backgroundColor }} onClick={handleClick}>
+      <div className="logo" style={{ backgroundImage: styles.backgroundImage }}></div>
     </div>
   );
 }

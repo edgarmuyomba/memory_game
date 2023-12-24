@@ -1,8 +1,21 @@
-function getImages() {
-    let images = [];
-    for (let i = 0; i < 9; i++) {
-        images.push('src/assets/batman.png');
+async function getImages() {
+    let endPoint = 'http://localhost:8000';
+
+    let options = {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Token 01fae97f632a9b2ac0a92bc945c4f25b3fae8f3c',
+        'Content-type': 'application/json'
+      }
     }
+
+    let response = await fetch(`${endPoint}/api/random/9`, options);
+    let logos = await response.json();
+
+    let images = [];
+    logos.forEach((logo) => {
+      images.push(`${logo.image}`)
+    })
     return images;
 }
 

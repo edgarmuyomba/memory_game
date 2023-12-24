@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tile from "./Tile";
 import { getImages } from "./utils";
 
@@ -53,8 +53,24 @@ function honeyComb(images) {
 }
 
 export default function Gameplay() {
-    const [images, setImages] = useState(getImages());
-    const rows = honeyComb(images);
+    const [images, setImages] = useState(null);
+    const [rows, setRows] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getImages();
+                setImages(data);
+                const honeyCombRows = honeyComb(data);
+                setRows(honeyCombRows);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
 
     return (
         <div className="gameplay">

@@ -1,0 +1,26 @@
+div.gameplay {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.gameContainer {
+    border: 1px solid red;
+}
+
+.gameContainer > .row {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+    /* border: 1px solid red; */
+    justify-content: center;
+    position: relative;
+}
+
+.gameContainer > .offset {
+    position: relative;
+    left: calc(100% / 10);
+    top: -35px;
+}

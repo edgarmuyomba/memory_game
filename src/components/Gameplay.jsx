@@ -36,11 +36,6 @@ function honeyComb(images) {
             y = random(0, 6);
             cell = honeycomb[x][y];
         }
-        let props = {
-            imageUrl: images[i],
-            bgColor: 'grey'
-        }
-        // honeycomb[x][y] = <Tile props={props} />
         honeycomb[x][y] = i;
     }
 
@@ -48,10 +43,6 @@ function honeyComb(images) {
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 7; j++) {
             if (honeycomb[i][j] === true) {
-                let props = {
-                    bgColor: getRandomGrey()
-                }
-                // honeycomb[i][j] = <Tile props={props} />
                 honeycomb[i][j] = 'noimage';
             } else continue
         }

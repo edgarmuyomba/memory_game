@@ -1,21 +1,62 @@
-import { getImages } from './utils';
+import { getImages, shuffleArray } from './utils';
+import { useState, useEffect } from 'react';
 
 import '../styles/tile.css'
 
-export default function Tile({props}) {
-    let _styles = {
-        backgroundImage: `url(${props.imageUrl})`, 
-        backgroundColor: props.bgColor,
+export default function Tile({ props }) {
+  const [styles, setStyles] = useState({
+    backgroundImage: `url(${props.imageUrl})`,
+    backgroundColor: props.bgColor,
+  });
+
+  const handleClick = () => {
+    if (props.imageUrl !== null) {
+        
+        // Trigger the fade-in animation
+        animateTiles();
+        props.updateTiles((images) => getImages());
     }
 
-    function handleClick() {
-        if (props.imageUrl !== null) {
-            props.updateTiles((images) => getImages());
-        }
-    }
-    
-    return (
-        <div className="tile"  style={_styles} onClick={handleClick}>
-        </div>
-    );
+  };
+
+  const animateTiles = () => {
+    const tiles = document.querySelectorAll('.tile');
+
+    // Shuffle the array of tiles
+    const shuffledTiles = Array.from(tiles);
+    shuffleArray(shuffledTiles);
+
+    shuffledTiles.forEach((tile, i) => {
+      // Set different animation delays for fading out
+      const delay = i * 90; // Adjust the delay as needed
+      tile.style.animation = `fadeOut 1s ${delay}ms forwards`;
+    });
+
+    // After a delay, reset the animation to fade back in and update the image
+    setTimeout(() => {
+      setStyles({
+        backgroundImage: `url(${props.imageUrl})`,
+        backgroundColor: props.bgColor,
+      });
+
+      shuffledTiles.forEach((tile, i) => {
+        // Set different animation delays for fading in
+        const fadeInDelay = i * 90; // Adjust the delay as needed
+        tile.style.animation = `fadeIn 1s ${fadeInDelay}ms forwards`;
+      });
+    }, 0); // Adjust the delay as needed
+  };
+
+  useEffect(() => {
+    // Update styles when imageUrl or bgColor changes
+    setStyles({
+      backgroundImage: `url(${props.imageUrl})`,
+      backgroundColor: props.bgColor,
+    });
+  }, [props.imageUrl, props.bgColor]);
+
+  return (
+    <div className="tile" style={styles} onClick={handleClick}>
+    </div>
+  );
 }

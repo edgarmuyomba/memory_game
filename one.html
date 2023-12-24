@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            height: 300px;
+            width: 900px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .box {
+            height: 80%;
+            width: 80%;
+            background-color: orange;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        .animate {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+    <script>
+        const boxes = document.querySelectorAll('.box');
+      
+        boxes.forEach((box, index) => {
+          box.addEventListener('click', () => {
+            setTimeout(() => {
+              box.classList.toggle('animate');
+      
+              // Add a delay for the second box based on its index
+              setTimeout(() => {
+                const nextIndex = (index + 1) % boxes.length;
+                boxes[nextIndex].classList.toggle('animate');
+              }, 500);
+            }, 500 * index);
+          });
+        });
+      </script>
+</body>
+
+</html>

@@ -6,15 +6,10 @@ div.gameplay {
     align-items: center;
 }
 
-div.gameContainer {
-    border: 1px solid red;
-}
-
 .gameContainer > .row {
     display: flex;
     gap: 3px;
     width: 100%;
-    /* border: 1px solid red; */
     justify-content: center;
     position: relative;
 }

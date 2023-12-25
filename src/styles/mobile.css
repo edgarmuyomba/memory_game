@@ -1,0 +1,42 @@
+@media (max-width: 767px) {
+    div#root {
+        flex-direction: column;
+    }
+
+    aside {
+        width: 100%;
+        height: 15%;
+    }
+
+    aside p.title {
+        margin: 2rem 1rem;
+        font-size: 1.5rem;
+        padding-bottom: 8px;
+        text-align: center;
+    }
+
+    aside div.scores {
+        padding: 8px;
+    }
+
+    aside p.score {
+        font-size: 1rem;
+    }
+
+    aside p.score span,
+    aside p.hs span {
+        font-weight: 600;
+    }
+
+    aside p.hs {
+        font-size: 1rem;
+    }
+
+    aside footer {
+        display: none;
+    }
+
+    div.gameplay {
+        width: 100%;
+    }
+}

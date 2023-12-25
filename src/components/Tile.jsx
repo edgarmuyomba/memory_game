@@ -1,18 +1,21 @@
-import { getImages, shuffleArray } from './utils';
+import { getLogos, shuffleArray } from './utils';
 import { useState, useEffect } from 'react';
 
 import '../styles/tile.css'
 
 export default function Tile({ props }) {
+
+  let imageUrl = props.logo !== null ? props.logo.image : null;
+
   const [styles, setStyles] = useState({
-    backgroundImage: props.imageUrl,
+    backgroundImage: imageUrl,
     backgroundColor: props.bgColor,
   });
 
   const fetchData = async () => {
     try {
       props.updateTiles(props.buffer.slice(0, 9));
-      const data = await getImages(9);
+      const data = await getLogos(9);
       props.updateBuffer(data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -20,10 +23,11 @@ export default function Tile({ props }) {
   };
 
   const handleClick = () => {
-    if (props.imageUrl !== null) {
+    if (props.logo !== null) {
 
+      props.trackClicks(props.logo);
+      fetchData(); // might have to change the timing here!!!
       // Trigger the fade-in animation
-      setTimeout(() => fetchData(), 100);
       animateTiles();
     }
 
@@ -45,7 +49,7 @@ export default function Tile({ props }) {
     // After a delay, reset the animation to fade back in and update the image
     setTimeout(() => {
       setStyles({
-        backgroundImage: `url(${props.imageUrl})`,
+        backgroundImage: `url(${imageUrl})`,
         backgroundColor: props.bgColor,
       });
 
@@ -58,12 +62,12 @@ export default function Tile({ props }) {
   };
 
   useEffect(() => {
-    // Update styles when imageUrl or bgColor changes
+    // Update styles when logo.image or bgColor changes
     setStyles({
-      backgroundImage: props.imageUrl,
+      backgroundImage: imageUrl,
       backgroundColor: props.bgColor,
     });
-  }, [props.imageUrl, props.bgColor]);
+  }, [imageUrl, props.bgColor]);
 
   return (
     <div className="tile" style={{ backgroundColor: styles.backgroundColor }} onClick={handleClick}>

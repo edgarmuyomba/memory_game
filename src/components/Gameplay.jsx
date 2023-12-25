@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Tile from "./Tile";
-import { getImages } from "./utils";
+import { getLogos } from "./utils";
 
 import '../styles/gameplay.css'
 
@@ -52,17 +52,19 @@ function honeyComb() {
     return honeycomb;
 }
 
-export default function Gameplay() {
-    const [images, setImages] = useState([null, null, null, null, null, null, null, null, null]);
+export default function Gameplay({ score, updateScore, highScore, updateHighScore }) {
+    const [logos, setLogos] = useState([null, null, null, null, null, null, null, null, null]);
     const [buffer, setBuffer] = useState([]);
     const [rows, setRows] = useState([]);
+
+    const [clicked, setClicked] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const imageLinks = await getImages(18);
-                setImages(imageLinks.slice(0, 9));
-                setBuffer(imageLinks.slice(9));
+                const _logos = await getLogos(18);
+                setLogos(_logos.slice(0, 9));
+                setBuffer(_logos.slice(9));
                 const honeyCombRows = honeyComb();
                 setRows(honeyCombRows);
             } catch (error) {
@@ -77,8 +79,21 @@ export default function Gameplay() {
         // when the images are changed, the ordering of the images also changes
         const honeyCombRows = honeyComb();
         setRows(honeyCombRows);
-    }, images);
+    }, logos);
 
+    function trackClicks(logo) {
+        let id = logo.company;
+
+        if (clicked.includes(id)) {
+            updateScore(score => 0);
+            setClicked([]);
+        }
+        else {
+            updateScore(score => score + 1);
+            updateHighScore(hs => Math.max(score + 1, highScore));
+            setClicked(prevClicked => prevClicked.concat([id]));
+        }
+    }
 
     return (
         <div className="gameplay">
@@ -93,15 +108,16 @@ export default function Gameplay() {
                                             return typeof (tile) === 'number'
                                                 ?
                                                 <Tile key={index} props={{
-                                                    imageUrl: images[tile],
+                                                    logo: logos[tile],
                                                     bgColor: 'grey',
-                                                    updateTiles: setImages,
+                                                    updateTiles: setLogos,
                                                     updateBuffer: setBuffer,
-                                                    buffer: buffer
+                                                    buffer: buffer,
+                                                    trackClicks: trackClicks
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
-                                                    imageUrl: null
+                                                    logo: null
                                                 }} />
                                         })
                                     }
@@ -113,15 +129,16 @@ export default function Gameplay() {
                                             return typeof (tile) === 'number'
                                                 ?
                                                 <Tile key={index} props={{
-                                                    imageUrl: images[tile],
+                                                    logo: logos[tile],
                                                     bgColor: 'grey',
-                                                    updateTiles: setImages,
+                                                    updateTiles: setLogos,
                                                     updateBuffer: setBuffer,
-                                                    buffer: buffer
+                                                    buffer: buffer,
+                                                    trackClicks: trackClicks
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
-                                                    imageUrl: null
+                                                    logo: null
                                                 }} />
                                         })
                                     }
@@ -133,15 +150,16 @@ export default function Gameplay() {
                                             return typeof (tile) === 'number'
                                                 ?
                                                 <Tile key={index} props={{
-                                                    imageUrl: images[tile],
+                                                    logo: logos[tile],
                                                     bgColor: 'grey',
-                                                    updateTiles: setImages,
+                                                    updateTiles: setLogos,
                                                     updateBuffer: setBuffer,
-                                                    buffer: buffer
+                                                    buffer: buffer,
+                                                    trackClicks: trackClicks
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
-                                                    imageUrl: null
+                                                    logo: null
                                                 }} />
                                         })
                                     }
@@ -153,15 +171,16 @@ export default function Gameplay() {
                                             return typeof (tile) === 'number'
                                                 ?
                                                 <Tile key={index} props={{
-                                                    imageUrl: images[tile],
+                                                    logo: logos[tile],
                                                     bgColor: 'grey',
-                                                    updateTiles: setImages,
+                                                    updateTiles: setLogos,
                                                     updateBuffer: setBuffer,
-                                                    buffer: buffer
+                                                    buffer: buffer,
+                                                    trackClicks: trackClicks
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
-                                                    imageUrl: null
+                                                    logo: null
                                                 }} />
                                         })
                                     }
@@ -173,15 +192,16 @@ export default function Gameplay() {
                                             return typeof (tile) === 'number'
                                                 ?
                                                 <Tile key={index} props={{
-                                                    imageUrl: images[tile],
+                                                    logo: logos[tile],
                                                     bgColor: 'grey',
-                                                    updateTiles: setImages,
+                                                    updateTiles: setLogos,
                                                     updateBuffer: setBuffer,
-                                                    buffer: buffer
+                                                    buffer: buffer,
+                                                    trackClicks: trackClicks
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
-                                                    imageUrl: null
+                                                    logo: null
                                                 }} />
                                         })
                                     }

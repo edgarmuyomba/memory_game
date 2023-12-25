@@ -1,4 +1,4 @@
-async function getImages(num) {
+async function getLogos(num) {
     let endPoint = 'http://localhost:8000';
 
     let options = {
@@ -12,11 +12,7 @@ async function getImages(num) {
     let response = await fetch(`${endPoint}/api/random/${num}`, options);
     let logos = await response.json();
 
-    let images = [];
-    logos.forEach((logo) => {
-      images.push(`${logo.image}`)
-    })
-    return images;
+    return logos;
 }
 
 function shuffleArray(array) {
@@ -26,4 +22,4 @@ function shuffleArray(array) {
     }
   }
 
-export { getImages, shuffleArray };
+export { getLogos, shuffleArray };

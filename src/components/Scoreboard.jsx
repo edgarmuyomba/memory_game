@@ -1,9 +1,6 @@
-import Scorecard from "./Scorecard";
-import Highscore from "./Highscore";
-
 import '../styles/scoreboard.css'
 
-export default function Scoreboard() {
+export default function Scoreboard({ score, highScore }) {
     return (
         <aside>
             <p className="title">
@@ -13,13 +10,13 @@ export default function Scoreboard() {
                 <p className="score">
                     Score <br/>
                     <span>
-                        <Scorecard />
+                        {score}
                     </span>
                 </p>
                 <p className="hs">
                     Highscore <br />
                     <span>
-                        <Highscore />
+                        {highScore}
                     </span>
                 </p>
             </div>

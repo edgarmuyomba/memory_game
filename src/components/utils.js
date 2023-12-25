@@ -4,7 +4,7 @@ async function getImages() {
     let options = {
       method: 'GET',
       headers: {
-        'Authorization': 'Token 01fae97f632a9b2ac0a92bc945c4f25b3fae8f3c',
+        'Authorization': "Token 01fae97f632a9b2ac0a92bc945c4f25b3fae8f3c",
         'Content-type': 'application/json'
       }
     }

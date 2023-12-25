@@ -24,7 +24,7 @@ export default function Scoreboard() {
                 </p>
             </div>
             <footer>
-                <a href="https://github.com/edgarmuyomba">&copy;Edgar Muyomba</a>
+                <a href="https://github.com/edgarmuyomba">&copy; Edgar Muyomba</a>
             </footer>
         </aside>
     );

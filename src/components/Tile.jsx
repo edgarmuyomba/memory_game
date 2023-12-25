@@ -5,7 +5,7 @@ import '../styles/tile.css'
 
 export default function Tile({ props }) {
   const [styles, setStyles] = useState({
-    backgroundImage: `url(${props.imageUrl})`,
+    backgroundImage: props.imageUrl,
     backgroundColor: props.bgColor,
   });
 
@@ -22,8 +22,8 @@ export default function Tile({ props }) {
     if (props.imageUrl !== null) {
 
       // Trigger the fade-in animation
+      setTimeout(() => fetchData(), 100);
       animateTiles();
-      setTimeout(() => fetchData(), 1000);
     }
 
   };
@@ -59,14 +59,14 @@ export default function Tile({ props }) {
   useEffect(() => {
     // Update styles when imageUrl or bgColor changes
     setStyles({
-      backgroundImage: `url(${props.imageUrl})`,
+      backgroundImage: props.imageUrl,
       backgroundColor: props.bgColor,
     });
   }, [props.imageUrl, props.bgColor]);
 
   return (
     <div className="tile" style={{ backgroundColor: styles.backgroundColor }} onClick={handleClick}>
-      <div className="logo" style={{ backgroundImage: styles.backgroundImage }}></div>
+      <img src={styles.backgroundImage} alt="" />
     </div>
   );
 }

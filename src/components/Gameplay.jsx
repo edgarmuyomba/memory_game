@@ -18,7 +18,7 @@ function getRandomGrey() {
     return greyColor;
 }
 
-function honeyComb(images) {
+function honeyComb() {
     const honeycomb = [
         [false, false, true, true, true, false, false],
         [false, true, true, true, true, false, false],
@@ -53,7 +53,7 @@ function honeyComb(images) {
 }
 
 export default function Gameplay() {
-    const [images, setImages] = useState(null);
+    const [images, setImages] = useState([null, null, null, null, null, null, null, null, null]);
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -61,7 +61,7 @@ export default function Gameplay() {
             try {
                 const data = await getImages();
                 setImages(data);
-                const honeyCombRows = honeyComb(data);
+                const honeyCombRows = honeyComb();
                 setRows(honeyCombRows);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -70,6 +70,12 @@ export default function Gameplay() {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        // when the images are changed, the ordering of the images also changes
+        const honeyCombRows = honeyComb();
+        setRows(honeyCombRows);
+    }, images);
 
 
     return (
@@ -84,12 +90,12 @@ export default function Gameplay() {
                                         row.map((tile, index) => {
                                             return typeof (tile) === 'number'
                                                 ?
-                                                <Tile props={{
+                                                <Tile key={index} props={{
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
                                                 }} />
-                                                : tile === 'noimage' && <Tile props={{
+                                                : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
                                                     imageUrl: null
                                                 }} />
@@ -102,12 +108,12 @@ export default function Gameplay() {
                                         row.map((tile, index) => {
                                             return typeof (tile) === 'number'
                                                 ?
-                                                <Tile props={{
+                                                <Tile key={index} props={{
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
                                                 }} />
-                                                : tile === 'noimage' && <Tile props={{
+                                                : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
                                                     imageUrl: null
                                                 }} />
@@ -120,12 +126,12 @@ export default function Gameplay() {
                                         row.map((tile, index) => {
                                             return typeof (tile) === 'number'
                                                 ?
-                                                <Tile props={{
+                                                <Tile key={index} props={{
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
                                                 }} />
-                                                : tile === 'noimage' && <Tile props={{
+                                                : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
                                                     imageUrl: null
                                                 }} />
@@ -138,12 +144,12 @@ export default function Gameplay() {
                                         row.map((tile, index) => {
                                             return typeof (tile) === 'number'
                                                 ?
-                                                <Tile props={{
+                                                <Tile key={index} props={{
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
                                                 }} />
-                                                : tile === 'noimage' && <Tile props={{
+                                                : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
                                                     imageUrl: null
                                                 }} />
@@ -156,12 +162,12 @@ export default function Gameplay() {
                                         row.map((tile, index) => {
                                             return typeof (tile) === 'number'
                                                 ?
-                                                <Tile props={{
+                                                <Tile key={index} props={{
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
                                                 }} />
-                                                : tile === 'noimage' && <Tile props={{
+                                                : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
                                                     imageUrl: null
                                                 }} />

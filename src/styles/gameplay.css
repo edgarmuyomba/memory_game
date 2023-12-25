@@ -8,14 +8,8 @@ div.gameplay {
 
 .gameContainer > .row {
     display: flex;
-    gap: 3px;
+    gap: 1px;
     width: 100%;
     justify-content: center;
     position: relative;
-}
-
-.gameContainer > .offset {
-    position: relative;
-    left: calc(100% / 10);
-    top: -35px;
 }

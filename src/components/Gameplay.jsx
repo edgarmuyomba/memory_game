@@ -4,7 +4,7 @@ import { getImages } from "./utils";
 
 import '../styles/gameplay.css'
 
-function random(min, max) {
+function random(min, max) { 
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -54,13 +54,15 @@ function honeyComb() {
 
 export default function Gameplay() {
     const [images, setImages] = useState([null, null, null, null, null, null, null, null, null]);
+    const [buffer, setBuffer] = useState([]);
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getImages();
-                setImages(data);
+                const imageLinks = await getImages(18);
+                setImages(imageLinks.slice(0, 9));
+                setBuffer(imageLinks.slice(9));
                 const honeyCombRows = honeyComb();
                 setRows(honeyCombRows);
             } catch (error) {
@@ -94,6 +96,8 @@ export default function Gameplay() {
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
+                                                    updateBuffer: setBuffer,
+                                                    buffer: buffer
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
@@ -112,6 +116,8 @@ export default function Gameplay() {
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
+                                                    updateBuffer: setBuffer,
+                                                    buffer: buffer
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
@@ -130,6 +136,8 @@ export default function Gameplay() {
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
+                                                    updateBuffer: setBuffer,
+                                                    buffer: buffer
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
@@ -148,6 +156,8 @@ export default function Gameplay() {
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
+                                                    updateBuffer: setBuffer,
+                                                    buffer: buffer
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),
@@ -166,6 +176,8 @@ export default function Gameplay() {
                                                     imageUrl: images[tile],
                                                     bgColor: 'grey',
                                                     updateTiles: setImages,
+                                                    updateBuffer: setBuffer,
+                                                    buffer: buffer
                                                 }} />
                                                 : tile === 'noimage' && <Tile key={index} props={{
                                                     bgColor: getRandomGrey(),

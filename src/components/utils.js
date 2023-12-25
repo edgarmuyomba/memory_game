@@ -1,4 +1,4 @@
-async function getImages() {
+async function getImages(num) {
     let endPoint = 'http://localhost:8000';
 
     let options = {
@@ -9,7 +9,7 @@ async function getImages() {
       }
     }
 
-    let response = await fetch(`${endPoint}/api/random/9`, options);
+    let response = await fetch(`${endPoint}/api/random/${num}`, options);
     let logos = await response.json();
 
     let images = [];

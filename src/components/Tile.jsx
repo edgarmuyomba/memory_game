@@ -11,8 +11,9 @@ export default function Tile({ props }) {
 
   const fetchData = async () => {
     try {
-      const data = await getImages();
-      props.updateTiles((images) => data);
+      props.updateTiles(props.buffer.slice(0, 9));
+      const data = await getImages(9);
+      props.updateBuffer(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

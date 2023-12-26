@@ -1,7 +1,7 @@
 # Memory Game
 This is a simple memory game designed using react as part of [The Odin Project](https://theodinproject.com) React Exercises. The aim of the game is to continuously select images from the provided images without selecting an image twice. The images displayed in my version of the game are company logos provided by an api I designed using [Django Rest Framework](https://www.django-rest-framework.org/). Check out the repository [here](https://github.com/edgarmuyomba/logoAPI).
 
-Check out the live version of the project [here]().
+Check out the live version of the project [here](https://memory-game-five-gray.vercel.app/).
 
 ## Screenshots
 Desktop Version

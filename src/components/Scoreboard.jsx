@@ -6,6 +6,7 @@ export default function Scoreboard({ score, highScore }) {
             <p className="title">
                 <span>Memory</span> Game.
             </p>
+            <p className="guide">Select as many images as possible without repeating an image!</p>
             <div className="scores">
                 <p className="score">
                     Score <br/>

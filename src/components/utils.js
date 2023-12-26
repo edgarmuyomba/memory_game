@@ -1,5 +1,5 @@
 async function getLogos(num) {
-    let endPoint = 'http://localhost:8000';
+    let endPoint = 'https://logoapi-production.up.railway.app';
 
     let options = {
       method: 'GET',

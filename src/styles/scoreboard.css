@@ -7,15 +7,20 @@ aside {
 }
 
 p.title {
-    margin: 3rem 2rem;
+    margin: 3rem 2rem 0 2rem;
     font-size: 2rem;
     color: white;
-    border-bottom: 1px solid white;
-    padding-bottom: 16px;
 }
 
 p.title span {
     font-weight: 900;
+}
+
+p.guide {
+    color: grey;
+    margin: 0 2rem 3rem 2rem;
+    font-size: 0.8rem;
+    font-weight: lighter;
 }
 
 div.scores {

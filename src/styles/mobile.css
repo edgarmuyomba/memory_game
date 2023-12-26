@@ -43,4 +43,8 @@
     div.gameplay {
         width: 100%;
     }
+
+    .tile {
+        padding: 10px;
+    }
 }
